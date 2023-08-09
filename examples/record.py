@@ -49,7 +49,7 @@ parser.add_argument(
     default="record_configuration.xml",
     help="data configuration file to use (record_configuration.xml)",
 )
-parser.add_argument(
+filepath = parser.add_argument(
     "--output",
     default="robot_data.csv",
     help="data output file to write to (robot_data.csv)",
@@ -133,3 +133,18 @@ sys.stdout.write("\rComplete!            \n")
 
 con.send_pause()
 con.disconnect()
+
+#check accel values 
+
+
+args = parser.parse_args()
+filepath = args.output
+
+file_path = "/home/ur/RTDE_Python/RTDE_Python_Client_Library/examples/" + filepath
+
+data = accel.read_float_values_from_file(file_path)
+
+accel_value = accel.check_value(data)
+
+print(data)
+print(accel_value)
